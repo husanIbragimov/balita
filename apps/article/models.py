@@ -21,9 +21,10 @@ class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # OneToMany
     description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(Tag)
-    image_1 = models.ImageField(upload_to='Article/', null=True, blank=True)
+    image_1 = models.ImageField(upload_to='Article/')
     image_2 = models.ImageField(upload_to='Article/', null=True, blank=True)
     image_3 = models.ImageField(upload_to='Article/', null=True, blank=True)
+    for_banner = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
