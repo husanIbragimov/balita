@@ -33,8 +33,10 @@ def index(request):
 def article_detail(request, pk):
     article = Article.objects.get(id=pk)
 
+    articles = Article.objects.filter(category_id=article.category.id)[:3]
     context = {
-        "article": article
+        "article": article,
+        "articles": articles
     }
 
     return render(request, 'blog-single.html', context)
