@@ -717,7 +717,7 @@ textarea.form-control {
 
 .post-entry-horzontal a .text {
   padding: 30px;
-  width: calc(100 - 200px);
+  width: 70%;
   border: 1px solid #e6e6e6;
   border-left: none;
 }
