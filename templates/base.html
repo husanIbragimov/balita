@@ -58,35 +58,20 @@
                         <div class="collapse navbar-collapse" id="navbarMenu">
                               <ul class="navbar-nav mx-auto">
                                     <li class="nav-item">
-                                          <a class="nav-link active" href="index-2.html">Home</a>
+                                          <a class="nav-link active" href="/">Home</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                           <a class="nav-link dropdown-toggle" href="#" id="dropdown04"
                                                 data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Travel</a>
+                                                aria-expanded="false">Categories</a>
                                           <div class="dropdown-menu" aria-labelledby="dropdown04">
                                                 {% for cat in categories %}
-                                                      <a class="dropdown-item" href="{% url 'category' cat.id %}">{{cat}}     </a>
+                                                      <a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{cat}}     </a>
                                                 {% endfor %}
                                           </div>
                                     </li>
-                                    <li class="nav-item dropdown">
-                                          <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Categories</a>
-                                          <div class="dropdown-menu" aria-labelledby="dropdown05">
-                                                <a class="dropdown-item" href="category.html">Lifestyle</a>
-                                                <a class="dropdown-item" href="category.html">Food</a>
-                                                <a class="dropdown-item" href="category.html">Adventure</a>
-                                                <a class="dropdown-item" href="category.html">Travel</a>
-                                                <a class="dropdown-item" href="category.html">Business</a>
-                                          </div>
-                                    </li>
                                     <li class="nav-item">
-                                          <a class="nav-link" href="about.html">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                          <a class="nav-link" href="contact.html">Contact</a>
+                                          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                                     </li>
                               </ul>
                         </div>
@@ -172,16 +157,7 @@
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-4">
-                                      <div class="mb-5">
-                                            <h3>Quick Links</h3>
-                                            <ul class="list-unstyled">
-                                                  <li><a href="#">About Us</a></li>
-                                                  <li><a href="#">Travel</a></li>
-                                                  <li><a href="#">Adventure</a></li>
-                                                  <li><a href="#">Courses</a></li>
-                                                  <li><a href="#">Categories</a></li>
-                                            </ul>
-                                      </div>
+                                      
                                       <div class="mb-5">
                                             <h3>Social</h3>
                                             <ul class="list-unstyled footer-social">
@@ -221,6 +197,7 @@
               <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                     stroke="#f4b214" />
         </svg></div>
+  <script src="{% static '' %}js/anime-404.js"></script>
   <script src="{% static '' %}js/jquery-3.2.1.min.js"></script>
   <script src="{% static '' %}js/jquery-migrate-3.0.0.js"></script>
   <script src="{% static '' %}js/popper.min.js"></script>

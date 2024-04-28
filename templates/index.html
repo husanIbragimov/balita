@@ -9,7 +9,7 @@
                               <div class="owl-carousel owl-theme home-slider">
                                     {% for banner in banners %}
                                           <div>
-                                                <a href="{% url 'detail' banner.id %}" class="a-block d-flex align-items-center height-lg"
+                                                <a href="{% url 'detail' banner.slug %}" class="a-block d-flex align-items-center height-lg"
                                                       style="background-image: url('{{ banner.image_1.url }}'); ">
                                                       <div class="text half-to-full">
                                                             <div class="post-meta">
@@ -18,7 +18,7 @@
                                                                   <span class="ml-2"><span class="fa fa-comments"></span>
                                                                         {{ banner.comment_set.count }}</span>
                                                             </div>
-                                                            <h3>{{ banner.title }}</h3>
+                                                            <h3>{{ banner.title|slice:"0:35" }}...</h3>
                                                             <p>{{ banner.description|slice:":120" }}</p>
                                                       </div>
                                                 </a>
@@ -31,7 +31,7 @@
                   <div class="row">
                         {% for last_article in last_articles %}
                               <div class="col-md-6 col-lg-4">
-                                    <a href="{% url 'detail' last_article.id %}" class="a-block d-flex align-items-center height-md"
+                                    <a href="{{ last_article.get_absolute_url }}" class="a-block d-flex align-items-center height-md"
                                           style="background-image: url('{{ last_article.image_1.url }}'); ">
                                           <div class="text">
                                                 <div class="post-meta">
@@ -39,7 +39,7 @@
                                                       <span class="mr-2">{{ last_articl.ecreated_at|date }} </span> &bullet;
                                                       <span class="ml-2"><span class="fa fa-comments"></span> {{ last_article.comment_set.count }}</span>
                                                 </div>
-                                                <h3>{{ last_article.title }}</h3>
+                                                <h3>{{ last_article.title|slice:"0:35" }}</h3>
                                           </div>
                                     </a>
                               </div>
@@ -60,7 +60,7 @@
                               <div class="row">
                                     {% for article in articles %}
                                           <div class="col-md-6">
-                                                <a href="{% url 'detail' article.id %}" class="blog-entry element-animate"
+                                                <a href="{% url 'detail' article.slug %}" class="blog-entry element-animate"
                                                       data-animate-effect="fadeIn">
                                                       <img src="{{ article.image_1.url }}" alt="Image placeholder">
                                                       <div class="blog-content-body">
@@ -70,7 +70,7 @@
                                                                   <span class="ml-2"><span class="fa fa-comments"></span>
                                                                         {{ article.comment_set.count }}</span>
                                                             </div>
-                                                            <h2>{{ article.title }}</h2>
+                                                            <h2>{{ article.title|slice:"0:25" }}</h2>
                                                       </div>
                                                 </a>
                                           </div>
@@ -134,103 +134,7 @@
                               </div>
                         </div>
 
-                        <div class="col-md-12 col-lg-4 sidebar">
-                              <div class="sidebar-box search-form-wrap">
-                                    <form action="#" class="search-form">
-                                          <div class="form-group">
-                                                <span class="icon fa fa-search"></span>
-                                                <input type="text" class="form-control" id="s"
-                                                      placeholder="Type a keyword and hit enter">
-                                          </div>
-                                    </form>
-                              </div>
-                              {% if request.user.is_authenticated %}
-                                    <div class="sidebar-box">
-                                          <div class="bio text-center">
-                                                {{request.user.}}
-                                                <img src="{{ request.user.avatar.url }}" alt="Image Placeholder" class="img-fluid">
-                                                <div class="bio-body">
-                                                      <h2>{{ request.user.get_full_name }}</h2>
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Exercitationem facilis sunt repellendus excepturi beatae porro
-                                                            debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
-                                                      <p><a href="#" class="btn btn-primary btn-sm">Read my bio</a></p>
-                                                      <p class="social">
-                                                            <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                                                            <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                                                            <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                                                            <a href="#" class="p-2"><span
-                                                                        class="fa fa-youtube-play"></span></a>
-                                                      </p>
-                                                </div>
-                                          </div>
-                                    </div>
-                              {% else %}
-                                    <div class="sidebar-box">
-                                          <div class="bio text-center">
-                                                <img src="{% static 'images/person_1.jpg' %}" alt="Image Placeholder" class="img-fluid">
-                                                <div class="bio-body">
-                                                      <h2>Meagan Smith</h2>
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Exercitationem facilis sunt repellendus excepturi beatae porro
-                                                            debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
-                                                      <p><a href="#" class="btn btn-primary btn-sm">Read my bio</a></p>
-                                                      <p class="social">
-                                                            <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                                                            <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                                                            <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                                                            <a href="#" class="p-2"><span
-                                                                        class="fa fa-youtube-play"></span></a>
-                                                      </p>
-                                                </div>
-                                          </div>
-                                    </div>
-                              {% endif %}
-
-                              <div class="sidebar-box">
-                                    <h3 class="heading">Popular Posts</h3>
-                                    <div class="post-entry-sidebar">
-                                          <ul>
-                                                {% for article in last_articles %}
-                                                      <li>
-                                                            <a href>
-                                                                  <img src="{{article.image_1.url}}" alt="Image placeholder"
-                                                                        class="mr-4">
-                                                                  <div class="text">
-                                                                        <h4>{{ article.title }}</h4>
-                                                                        <div class="post-meta">
-                                                                              <span class="mr-2">{{ article.created_at|date }} </span>
-                                                                              &bullet;
-                                                                              <span class="ml-2"><span
-                                                                                          class="fa fa-comments"></span>
-                                                                                          {{ article.comment_set.count }}</span>
-                                                                        </div>
-                                                                  </div>
-                                                            </a>
-                                                      </li>
-                                                {% endfor %}
-                                          </ul>
-                                    </div>
-                              </div>
-
-                              <div class="sidebar-box">
-                                    <h3 class="heading">Categories</h3>
-                                    <ul class="categories">
-                                          {% for cat in categories %}
-                                                <li><a href="{% url 'category' cat.id %}">{{ cat.title }} <span>({{ cat.article_set.count }})</span></a></li>
-                                          {% endfor %}
-                                    </ul>
-                              </div>
-
-                              <div class="sidebar-box">
-                                    <h3 class="heading">Tags</h3>
-                                    <ul class="tags">
-                                          {% for tag in tags %}
-                                                <li><a href="?tag={{tag}}">{{tag}}</a></li>
-                                          {% endfor %}
-                                    </ul>
-                              </div>
-                        </div>
+                        {% include 'rside.html' %}
 
                   </div>
             </div>

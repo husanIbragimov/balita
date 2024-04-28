@@ -3,6 +3,6 @@ from .views import index, article_detail, category_view
 
 urlpatterns = [
     path('', index),
-    path('detail/<int:pk>/', article_detail, name="detail"),
-    path('category/<int:cat_pk>/', category_view, name="category")
+    path('detail/<slug:slug>/', article_detail, name="detail"),
+    path('category/<slug:slug>/', category_view, name="category")
 ]

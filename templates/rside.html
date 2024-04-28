@@ -1,0 +1,99 @@
+{% load static %}
+
+<div class="col-md-12 col-lg-4 sidebar">
+    <div class="sidebar-box search-form-wrap">
+          <form action="#" class="search-form">
+                <div class="form-group">
+                      <span class="icon fa fa-search"></span>
+                      <input type="text" class="form-control" id="s"
+                            placeholder="Type a keyword and hit enter">
+                </div>
+          </form>
+    </div>
+    {% if request.user.is_authenticated %}
+          <div class="sidebar-box">
+                <div class="bio text-center">
+                      {{request.user.}}
+                      <img src="{{ request.user.avatar.url }}" alt="Image Placeholder" class="img-fluid">
+                      <div class="bio-body">
+                            <h2>{{ request.user.get_full_name }}</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                  Exercitationem facilis sunt repellendus excepturi beatae porro
+                                  debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
+                            <p><a href="#" class="btn btn-primary btn-sm">Read my bio</a></p>
+                            <p class="social">
+                                  <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                                  <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                                  <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                                  <a href="#" class="p-2"><span
+                                              class="fa fa-youtube-play"></span></a>
+                            </p>
+                      </div>
+                </div>
+          </div>
+    {% else %}
+          <div class="sidebar-box">
+                <div class="bio text-center">
+                      <img src="{% static 'images/person_1.jpg' %}" alt="Image Placeholder" class="img-fluid">
+                      <div class="bio-body">
+                            <h2>Meagan Smith</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                  Exercitationem facilis sunt repellendus excepturi beatae porro
+                                  debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
+                            <p><a href="#" class="btn btn-primary btn-sm">Read my bio</a></p>
+                            <p class="social">
+                                  <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                                  <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                                  <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                                  <a href="#" class="p-2"><span
+                                              class="fa fa-youtube-play"></span></a>
+                            </p>
+                      </div>
+                </div>
+          </div>
+    {% endif %}
+
+    <div class="sidebar-box">
+          <h3 class="heading">Popular Posts</h3>
+          <div class="post-entry-sidebar">
+                <ul>
+                      {% for article in last_articles %}
+                            <li>
+                                  <a href="{{ article.get_absolute_url }}">
+                                        <img src="{{article.image_1.url}}" alt="Image placeholder"
+                                              class="mr-4">
+                                        <div class="text">
+                                              <h4>{{ article.title|slice:"0:35" }}</h4>
+                                              <div class="post-meta">
+                                                    <span class="mr-2">{{ article.created_at|date }} </span>
+                                                    &bullet;
+                                                    <span class="ml-2"><span
+                                                                class="fa fa-comments"></span>
+                                                                {{ article.comment_set.count }}</span>
+                                              </div>
+                                        </div>
+                                  </a>
+                            </li>
+                      {% endfor %}
+                </ul>
+          </div>
+    </div>
+
+    <div class="sidebar-box">
+          <h3 class="heading">Categories</h3>
+          <ul class="categories">
+                {% for cat in categories %}
+                      <li><a href="{% url 'category' cat.slug %}">{{ cat.title }} <span>({{ cat.article_set.count }})</span></a></li>
+                {% endfor %}
+          </ul>
+    </div>
+
+    <div class="sidebar-box">
+          <h3 class="heading">Tags</h3>
+          <ul class="tags">
+                {% for tag in tags %}
+                      <li><a href="?tag={{tag}}">{{tag}}</a></li>
+                {% endfor %}
+          </ul>
+    </div>
+</div>
