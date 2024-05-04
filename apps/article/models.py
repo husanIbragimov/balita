@@ -55,6 +55,7 @@ class Article(models.Model):
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100, null=True)
     email = models.EmailField()
     comment = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

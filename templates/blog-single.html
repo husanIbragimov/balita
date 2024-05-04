@@ -33,136 +33,42 @@
                                      {% endfor %}
                               </div>
                               <div class="pt-5">
-                                    <h3 class="mb-5">6 Comments</h3>
+                                    <h3 class="mb-5">{{ article.comment_set.count }} Comments</h3>
                                     <ul class="comment-list">
+                                          {% for comment in comments %}
                                           <li class="comment">
                                                 <div class="vcard">
-                                                      <img src="images/person_1.jpg" alt="Image placeholder">
+                                                      {% if comment.user.avatar %}
+                                                      <img src="{{comment.user.avatar.url}}" alt="Image placeholder">
+                                                      {% else %}
+                                                      <img src="{% static '' %}images/default_user.png" alt="Image placeholder">
+                                                      {% endif %}
                                                 </div>
                                                 <div class="comment-body">
-                                                      <h3>Jean Doe</h3>
-                                                      <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                                            autem, eum officia, fugiat saepe enim sapiente iste iure!
-                                                            Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                                      <h3>{{comment.name}}</h3>
+                                                      <div class="meta">{{ comment.created_at }}</div>
+                                                      <p>{{comment.comment}}</p>
                                                       <p><a href="#" class="reply">Reply</a></p>
                                                 </div>
                                           </li>
-                                          <li class="comment">
-                                                <div class="vcard">
-                                                      <img src="images/person_1.jpg" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                      <h3>Jean Doe</h3>
-                                                      <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                                            autem, eum officia, fugiat saepe enim sapiente iste iure!
-                                                            Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                      <p><a href="#" class="reply">Reply</a></p>
-                                                </div>
-                                                <ul class="children">
-                                                      <li class="comment">
-                                                            <div class="vcard">
-                                                                  <img src="images/person_1.jpg"
-                                                                        alt="Image placeholder">
-                                                            </div>
-                                                            <div class="comment-body">
-                                                                  <h3>Jean Doe</h3>
-                                                                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                                        elit. Pariatur quidem laborum necessitatibus,
-                                                                        ipsam impedit vitae autem, eum officia, fugiat
-                                                                        saepe enim sapiente iste iure! Quam voluptas
-                                                                        earum impedit necessitatibus, nihil?</p>
-                                                                  <p><a href="#" class="reply">Reply</a></p>
-                                                            </div>
-                                                            <ul class="children">
-                                                                  <li class="comment">
-                                                                        <div class="vcard">
-                                                                              <img src="images/person_1.jpg"
-                                                                                    alt="Image placeholder">
-                                                                        </div>
-                                                                        <div class="comment-body">
-                                                                              <h3>Jean Doe</h3>
-                                                                              <div class="meta">January 9, 2018 at
-                                                                                    2:21pm</div>
-                                                                              <p>Lorem ipsum dolor sit amet, consectetur
-                                                                                    adipisicing elit. Pariatur quidem
-                                                                                    laborum necessitatibus, ipsam
-                                                                                    impedit vitae autem, eum officia,
-                                                                                    fugiat saepe enim sapiente iste
-                                                                                    iure! Quam voluptas earum impedit
-                                                                                    necessitatibus, nihil?</p>
-                                                                              <p><a href="#" class="reply">Reply</a></p>
-                                                                        </div>
-                                                                        <ul class="children">
-                                                                              <li class="comment">
-                                                                                    <div class="vcard">
-                                                                                          <img src="images/person_1.jpg"
-                                                                                                alt="Image placeholder">
-                                                                                    </div>
-                                                                                    <div class="comment-body">
-                                                                                          <h3>Jean Doe</h3>
-                                                                                          <div class="meta">January 9,
-                                                                                                2018 at 2:21pm</div>
-                                                                                          <p>Lorem ipsum dolor sit amet,
-                                                                                                consectetur adipisicing
-                                                                                                elit. Pariatur quidem
-                                                                                                laborum necessitatibus,
-                                                                                                ipsam impedit vitae
-                                                                                                autem, eum officia,
-                                                                                                fugiat saepe enim
-                                                                                                sapiente iste iure! Quam
-                                                                                                voluptas earum impedit
-                                                                                                necessitatibus, nihil?
-                                                                                          </p>
-                                                                                          <p><a href="#"
-                                                                                                      class="reply">Reply</a>
-                                                                                          </p>
-                                                                                    </div>
-                                                                              </li>
-                                                                        </ul>
-                                                                  </li>
-                                                            </ul>
-                                                      </li>
-                                                </ul>
-                                          </li>
-                                          <li class="comment">
-                                                <div class="vcard">
-                                                      <img src="images/person_1.jpg" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                      <h3>Jean Doe</h3>
-                                                      <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                                            autem, eum officia, fugiat saepe enim sapiente iste iure!
-                                                            Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                      <p><a href="#" class="reply">Reply</a></p>
-                                                </div>
-                                          </li>
+                                          {% endfor %}
                                     </ul>
 
                                     <div class="comment-form-wrap pt-5">
                                           <h3 class="mb-5">Leave a comment</h3>
-                                          <form action="#" class="p-5 bg-light">
+                                          <form action="#comment" class="p-5 bg-light" method="post">
+                                                {% csrf_token %}
                                                 <div class="form-group">
                                                       <label for="name">Name *</label>
-                                                      <input type="text" class="form-control" id="name">
+                                                      <input type="text" class="form-control" id="name" name="name">
                                                 </div>
                                                 <div class="form-group">
                                                       <label for="email">Email *</label>
-                                                      <input type="email" class="form-control" id="email">
+                                                      <input type="email" class="form-control" id="email" name="email">
                                                 </div>
                                                 <div class="form-group">
-                                                      <label for="website">Website</label>
-                                                      <input type="url" class="form-control" id="website">
-                                                </div>
-                                                <div class="form-group">
-                                                      <label for="message">Message</label>
-                                                      <textarea name id="message" cols="30" rows="10"
+                                                      <label for="comment">Message</label>
+                                                      <textarea id="comment" name="comment" cols="30" rows="10"
                                                             class="form-control"></textarea>
                                                 </div>
                                                 <div class="form-group">
@@ -186,45 +92,22 @@
                         </div>
                   </div>
                   <div class="row">
-                        <div class="col-md-6 col-lg-4">
-                              <a href="#" class="a-block d-flex align-items-center height-md"
-                                    style="background-image: url('images/img_2.jpg'); ">
-                                    <div class="text">
-                                          <div class="post-meta">
-                                                <span class="category">Lifestyle</span>
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        {% for obj in articles %}
+                              <div class="col-md-6 col-lg-4">
+                                    <a href="{{ obj.get_absolute_url }}" class="a-block d-flex align-items-center height-md"
+                                          style="background-image: url({{ obj.image_1.url }});">
+                                          <div class="text">
+                                                <div class="post-meta">
+                                                      <span class="category">{{ obj.category }}</span>
+                                                      <span class="mr-2">{{ obj.created_at|date }} </span> &bullet;
+                                                      <span class="ml-2"><span class="fa fa-comments"></span> {{ obj.comment_set.count }}</span>
+                                                </div>
+                                                <h3>{{ obj.title|slice:"0:30" }}...</h3>
                                           </div>
-                                          <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                    </div>
-                              </a>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                              <a href="#" class="a-block d-flex align-items-center height-md"
-                                    style="background-image: url('images/img_3.jpg'); ">
-                                    <div class="text">
-                                          <div class="post-meta">
-                                                <span class="category">Travel</span>
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                          </div>
-                                          <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                    </div>
-                              </a>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                              <a href="#" class="a-block d-flex align-items-center height-md"
-                                    style="background-image: url('images/img_4.jpg'); ">
-                                    <div class="text">
-                                          <div class="post-meta">
-                                                <span class="category">Food</span>
-                                                <span class="mr-2">March 15, 2018 </span> &bullet;
-                                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                          </div>
-                                          <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                    </div>
-                              </a>
-                        </div>
+                                    </a>
+                              </div>
+                        {% endfor %}
+                        
                   </div>
             </div>
       </section>

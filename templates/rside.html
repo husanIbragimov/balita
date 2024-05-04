@@ -13,8 +13,11 @@
     {% if request.user.is_authenticated %}
           <div class="sidebar-box">
                 <div class="bio text-center">
-                      {{request.user.}}
-                      <img src="{{ request.user.avatar.url }}" alt="Image Placeholder" class="img-fluid">
+                  {% if request.user.avatar %}
+                        <img src="{{ request.user.avatar.url }}" alt="Image Placeholder" class="img-fluid">
+                  {% else %}
+                        <img src="{% static '' %}images/default_user.png" alt="Image placeholder" class="img-fluid">
+                  {% endif %}
                       <div class="bio-body">
                             <h2>{{ request.user.get_full_name }}</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.

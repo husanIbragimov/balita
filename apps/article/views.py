@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Article, Category
+from django.shortcuts import render, redirect
+from .models import Article, Category, Comment
 from django.core.paginator import Paginator
 
 
@@ -13,7 +13,7 @@ def index(request):
         articles = articles.filter(tags__title__exact=tag)
 
     page_number = request.GET.get('page')
-    paginator = Paginator(articles, 2)
+    paginator = Paginator(articles, 10)
     selected_page = paginator.get_page(page_number)
     selected_page.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
 
@@ -29,9 +29,29 @@ def article_detail(request, slug):
     article = Article.objects.get(slug__exact=slug)
 
     articles = Article.objects.filter(category_id=article.category.id)[:3]
+    comments = Comment.objects.filter(article_id=article.id)
+
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return redirect("login")
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        comment = request.POST.get("comment")
+        
+        Comment.objects.create(
+            article_id=article.id,
+            user=request.user,
+            name=name,
+            email=email,
+            comment=comment
+        )
+        return redirect('detail', article.slug)
+        
+
     context = {
         "article": article,
-        "articles": articles
+        "articles": articles,
+        "comments": comments
     }
 
     return render(request, 'blog-single.html', context)
@@ -46,7 +66,7 @@ def category_view(request, slug):
     if tag:
         articles = articles.filter(tags__title__exact=tag)
 
-    paginator = Paginator(articles, 1)
+    paginator = Paginator(articles, 10)
     selected_page = paginator.get_page(page_number)
 
     context = {
